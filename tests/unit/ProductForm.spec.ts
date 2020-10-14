@@ -5,8 +5,10 @@ import VTextAreaFieldWithValidation from '@/components/inputs/VTextAreaFieldWith
 import VMoneyFieldWithValidation from '@/components/inputs/VMoneyFieldWithValidation.vue';
 import VSelectWithValidation from '@/components/inputs/VSelectWithValidation.vue';
 import Vuetify from 'vuetify';
+import flushPromises from 'flush-promises';
+import { Vue } from 'vue-property-decorator';
 
-describe('ProductList.vue', () => {
+describe('ProductForm.vue', () => {
   const localVue = createLocalVue();
   let vuetify: object = {};
   beforeEach(() => {
@@ -84,5 +86,26 @@ describe('ProductList.vue', () => {
     await wrapper.vm.$nextTick();
     wrapper.find('.v-btn.close').trigger('click');
     expect(wrapper.emitted('close-form')).toBeTruthy();
+  });
+  it('check if form submit button is disabled', async () => {
+    const wrapper = mountFunction({});
+    await wrapper.vm.$nextTick();
+    const button = wrapper.find('button[type="submit"]');
+    expect(button.attributes().disabled).toBeUndefined();
+  });
+  it('check validation of form with empty input', async () => {
+    const wrapper = mountFunction({});
+    wrapper.setData({ name: 'Test' });
+    await wrapper.vm.$nextTick();
+    await flushPromises();
+    const errorEl = wrapper.find('.error--text');
+    expect(errorEl).toBeTruthy();
+  });
+  it('valid form data validation', async () => {
+    const wrapper = mountFunction({});
+    wrapper.setData({ name: 'Test', description: 'test desc', price: '400', categoryId: 1 });
+    await wrapper.vm.$nextTick();
+    await flushPromises();
+    expect(await (wrapper.vm.$refs.observer as Vue & { validate: () => boolean }).validate()).toBeTruthy();
   });
 });

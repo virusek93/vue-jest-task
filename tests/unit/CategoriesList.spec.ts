@@ -2,7 +2,7 @@ import { createLocalVue, mount } from '@vue/test-utils';
 import Categories from '@/components/CategoriesList.vue';
 import Vuetify from 'vuetify';
 
-describe('ProductList.vue', () => {
+describe('CategoriesList.vue', () => {
   const localVue = createLocalVue();
   let vuetify: object = {};
   beforeEach(() => {
