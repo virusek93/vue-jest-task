@@ -33,8 +33,8 @@
         </v-row>
       </v-form>
       <v-card-actions class="justify-space-between mt-5 px-0">
-        <v-btn color="primary" @click="handleSubmit" :disabled="invalid">{{ submitBtnText }}</v-btn>
-        <v-btn @click="closeForm" v-if="productEdit">Cancel</v-btn>
+        <v-btn color="primary" @click="handleSubmit" :disabled="invalid" type="submit">{{ submitBtnText }}</v-btn>
+        <v-btn @click="closeForm" v-if="productEdit" class="close">Cancel</v-btn>
       </v-card-actions>
     </validation-observer>
     <v-snackbar dark right top v-model="showSnackBar" timeout="3000">{{ snackBarText }}</v-snackbar>
@@ -85,13 +85,18 @@ export default class ProductForm extends Vue {
     }
   }
 
-  @Emit('closeForm')
+  @Emit()
+  closeForm() {
+    this.productEdit = true;
+  }
+
   public handleSubmit(): void {
     if ((this.$refs.observer as Vue & { validate: () => boolean }).validate()) {
       this.saveProduct();
       this.snackBarText = `Your product ${name} was saved`;
       this.showSnackBar = true;
       this.clearForm();
+      this.closeForm();
     }
   }
 
