@@ -10,7 +10,7 @@ import { Vue } from 'vue-property-decorator';
 
 describe('ProductForm.vue', () => {
   const localVue = createLocalVue();
-  let vuetify: object = {};
+  let vuetify = {};
   beforeEach(() => {
     vuetify = new Vuetify();
   });
@@ -18,7 +18,7 @@ describe('ProductForm.vue', () => {
     return shallowMount(ProductForm, {
       localVue,
       vuetify,
-      ...options
+      ...options,
     });
   };
   const mountFunction = (options: any) => {
@@ -26,7 +26,7 @@ describe('ProductForm.vue', () => {
       localVue,
       vuetify,
       stubs: ['vuetify-money'],
-      ...options
+      ...options,
     });
   };
   it('renders a vue instance', () => {
@@ -53,8 +53,8 @@ describe('ProductForm.vue', () => {
     const title = 'Edit form';
     const wrapper = mountShallowFunction({
       propsData: {
-        title
-      }
+        title,
+      },
     });
     expect(wrapper.props('title')).toMatch(title);
   });
@@ -62,17 +62,17 @@ describe('ProductForm.vue', () => {
     const item = {
       category: {
         id: '1',
-        title: 'testCategory'
+        title: 'testCategory',
       },
       id: 'test_id',
       description: 'short test desc',
       name: 'test_name',
-      price: '500'
+      price: '500',
     };
     const wrapper = mountShallowFunction({
       propsData: {
-        item
-      }
+        item,
+      },
     });
     expect((wrapper.vm as any).name).toMatch(item.name);
     expect((wrapper.vm as any).description).toMatch(item.description);

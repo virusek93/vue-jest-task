@@ -5,28 +5,28 @@ import Vuetify from 'vuetify';
 
 describe('ProductList.vue', () => {
   const localVue = createLocalVue();
-  let vuetify: object = {};
+  let vuetify = {};
   const itemsExample = [
     {
       category: {
         id: '1',
-        title: 'testCategory'
+        title: 'testCategory',
       },
       id: 'test_id',
       description: 'short test desc',
       name: 'test_name',
-      price: '500'
+      price: '500',
     },
     {
       category: {
         id: '1',
-        title: 'testCategory'
+        title: 'testCategory',
       },
       id: 'test_id2',
       description: 'short test desc2',
       name: 'test_name2',
-      price: '5002'
-    }
+      price: '5002',
+    },
   ];
 
   beforeEach(() => {
@@ -37,7 +37,7 @@ describe('ProductList.vue', () => {
       localVue,
       vuetify,
       ...options,
-      stubs: ['vuetify-money']
+      stubs: ['vuetify-money'],
     });
   };
   it('renders a vue instance', () => {

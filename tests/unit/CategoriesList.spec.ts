@@ -4,7 +4,7 @@ import Vuetify from 'vuetify';
 
 describe('CategoriesList.vue', () => {
   const localVue = createLocalVue();
-  let vuetify: object = {};
+  let vuetify = {};
   beforeEach(() => {
     vuetify = new Vuetify();
   });
@@ -12,7 +12,7 @@ describe('CategoriesList.vue', () => {
     return mount(Categories, {
       localVue,
       vuetify,
-      ...options
+      ...options,
     });
   };
   it('renders a vue instance', () => {

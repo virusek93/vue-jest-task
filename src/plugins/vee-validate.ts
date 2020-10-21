@@ -3,5 +3,5 @@ import { extend } from 'vee-validate';
 
 extend('required', {
   ...required,
-  message: 'This field is required'
+  message: 'This field is required',
 });

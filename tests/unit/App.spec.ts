@@ -4,22 +4,22 @@ import Vuetify from 'vuetify';
 
 describe('ProductList.vue', () => {
   const localVue = createLocalVue();
-  let vuetify: object = {};
+  let vuetify = {};
   beforeEach(() => {
     vuetify = new Vuetify();
   });
   const $route = {
-    path: '/'
+    path: '/',
   };
   const mountFunction = (options: any) => {
     return shallowMount(App, {
       localVue,
       vuetify,
       mocks: {
-        $route
+        $route,
       },
       stubs: ['router-link', 'router-view'],
-      ...options
+      ...options,
     });
   };
   it('renders a vue instance', () => {
@@ -32,12 +32,12 @@ describe('ProductList.vue', () => {
   });
   it('check if Home link is present on the product add view', () => {
     const $route = {
-      path: '/add'
+      path: '/add',
     };
     const wrapper = mountFunction({
       mocks: {
-        $route
-      }
+        $route,
+      },
     });
     expect(wrapper.find('router-link-stub[to="/"]').exists()).toBe(true);
   });

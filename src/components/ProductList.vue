@@ -1,10 +1,8 @@
 <template>
   <v-container ref="productList">
     <v-data-table :headers="headers" :items="productList" sort-by="name">
-      <template v-slot:item.actions="{ item }">
-        <v-icon small class="mr-2" @click="editItem(item)">
-          mdi-pencil
-        </v-icon>
+      <template v-slot:[`item.actions`]="{ item }">
+        <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil </v-icon>
       </template>
     </v-data-table>
     <v-dialog v-model="dialogEdit" max-width="800px" :attach="$refs.productList">
@@ -24,8 +22,8 @@ import productItem from '@/types/productItem';
 @Component({
   components: {
     ProductForm,
-    ProductAddForm
-  }
+    ProductAddForm,
+  },
 })
 export default class ProductList extends Vue {
   productList = JSON.parse(localStorage.getItem('user-products') || '[]');
@@ -33,11 +31,11 @@ export default class ProductList extends Vue {
     {
       text: 'Name',
       align: 'start',
-      value: 'name'
+      value: 'name',
     },
     { text: 'Category', value: 'category.title' },
     { text: 'Price', value: 'price' },
-    { text: 'Actions', value: 'actions', sortable: false }
+    { text: 'Actions', value: 'actions', sortable: false },
   ];
   editedIndex = -1;
   editedItem = {};

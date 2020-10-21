@@ -13,8 +13,8 @@ import CategoriesList from '@/components/CategoriesList.vue';
 @Component({
   components: {
     CategoriesList,
-    ProductList
-  }
+    ProductList,
+  },
 })
 export default class Home extends Vue {}
 </script>

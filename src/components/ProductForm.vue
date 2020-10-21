@@ -57,8 +57,8 @@ import productItem from '@/types/productItem';
     VMoneyFieldWithValidation,
     VTextAreaFieldWithValidation,
     VTextFieldWIthValidation,
-    ValidationObserver
-  }
+    ValidationObserver,
+  },
 })
 export default class ProductForm extends Vue {
   @Prop({ type: Object }) readonly item!: productItem;
@@ -73,7 +73,7 @@ export default class ProductForm extends Vue {
   submitBtnText = 'Add Item';
   categories = categoriesJson.categories ? categoriesJson.categories : [];
 
-  mounted() {
+  mounted(): void {
     if (this.item) {
       const { name, description, price, category } = this.item;
       this.productEdit = true;
@@ -86,7 +86,7 @@ export default class ProductForm extends Vue {
   }
 
   @Emit()
-  closeForm() {
+  closeForm(): void {
     this.productEdit = true;
   }
 
@@ -107,7 +107,7 @@ export default class ProductForm extends Vue {
   private saveProduct(): boolean {
     const items = JSON.parse(localStorage.getItem('user-products') || '[]');
     const { name, description, price, categoryId } = this;
-    const category = this.categories.find(cat => cat.id == categoryId);
+    const category = this.categories.find((cat) => cat.id == categoryId);
     const categoryTitle = category && category.title ? category.title : '';
     const id = `${name}_${Math.random()}`;
     if (this.productEdit) {
@@ -118,7 +118,7 @@ export default class ProductForm extends Vue {
         name,
         description,
         price,
-        category: { id: categoryId, title: categoryTitle }
+        category: { id: categoryId, title: categoryTitle },
       };
       localStorage.setItem('user-products', JSON.stringify(items));
       const updated = JSON.parse(localStorage.getItem('user-products') || '[]');
@@ -133,7 +133,7 @@ export default class ProductForm extends Vue {
   private clearForm(): void {
     this.name = this.description = this.price = this.categoryId = '';
     requestAnimationFrame(() => {
-      (this.$refs.observer as Vue & { reset: () => {} }).reset();
+      (this.$refs.observer as Vue & { reset: () => void }).reset();
     });
   }
 }

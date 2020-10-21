@@ -61,4 +61,7 @@ typings/
 .next
 
 .idea/
+
 dist
+
+cypress/videos

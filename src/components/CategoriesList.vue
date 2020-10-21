@@ -15,12 +15,12 @@ import categoriesJson from '@/categories.json';
 import categoriesType from '@/types/categoriesType';
 import CategoriesListItem from '@/components/CategoriesListItem.vue';
 @Component({
-  components: { CategoriesListItem }
+  components: { CategoriesListItem },
 })
 export default class CategoriesList extends Vue {
   categories: Array<categoriesType> = [];
 
-  mounted() {
+  mounted(): void {
     this.categories = this.getCategories();
   }
 
@@ -31,8 +31,8 @@ export default class CategoriesList extends Vue {
       return dataTree;
     }
     const hashTable = Object.create(null);
-    categories.forEach(aData => (hashTable[aData.id] = { ...aData }));
-    categories.forEach(aData => {
+    categories.forEach((aData) => (hashTable[aData.id] = { ...aData }));
+    categories.forEach((aData) => {
       if (aData.parent) {
         if (!hashTable[aData.parent].subcategories) {
           hashTable[aData.parent].subcategories = [];

@@ -15,8 +15,8 @@ import { ValidationProvider } from 'vee-validate';
 import { Component, Prop, Watch, Vue } from 'vue-property-decorator';
 @Component({
   components: {
-    ValidationProvider
-  }
+    ValidationProvider,
+  },
 })
 export default class VTextAreaFieldWithValidation extends Vue {
   @Prop({ required: true, type: String }) readonly rules!: string;
@@ -25,14 +25,14 @@ export default class VTextAreaFieldWithValidation extends Vue {
   innerValue = '';
 
   @Watch('innerValue')
-  innerValueChange(newVal: string) {
+  innerValueChange(newVal: string): void {
     this.$emit('input', newVal);
   }
   @Watch('value')
-  valueChange(newVal: string) {
+  valueChange(newVal: string): void {
     this.innerValue = newVal;
   }
-  mounted() {
+  mounted(): void {
     if (this.value) {
       this.innerValue = this.value;
     }

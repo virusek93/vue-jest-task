@@ -4,7 +4,7 @@ import Vuetify from 'vuetify';
 
 describe('VTextFieldWIthValidation.vue', () => {
   const localVue = createLocalVue();
-  let vuetify: object = {};
+  let vuetify = {};
   beforeEach(() => {
     vuetify = new Vuetify();
   });
@@ -12,7 +12,7 @@ describe('VTextFieldWIthValidation.vue', () => {
     return mount(VTextAreaFieldWithValidation, {
       localVue,
       vuetify,
-      ...options
+      ...options,
     });
   };
   it('check if value proper set innerValue', () => {
@@ -21,8 +21,8 @@ describe('VTextFieldWIthValidation.vue', () => {
     const wrapper = mountFunction({
       propsData: {
         value,
-        rules
-      }
+        rules,
+      },
     });
     expect((wrapper.vm as any).innerValue).toEqual(value);
   });
@@ -32,8 +32,8 @@ describe('VTextFieldWIthValidation.vue', () => {
     const wrapper = mountFunction({
       propsData: {
         value,
-        rules
-      }
+        rules,
+      },
     });
     wrapper.find('input').setValue('hi');
     expect((wrapper.vm as any).innerValue).toEqual('hi');
@@ -44,8 +44,8 @@ describe('VTextFieldWIthValidation.vue', () => {
     const wrapper = mountFunction({
       propsData: {
         value,
-        rules
-      }
+        rules,
+      },
     });
     wrapper.setData({ innerValue: '' });
     const errorEl = wrapper.find('.error--text');

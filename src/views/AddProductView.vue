@@ -8,8 +8,8 @@ import ProductForm from '@/components/ProductForm.vue';
 
 @Component({
   components: {
-    ProductForm
-  }
+    ProductForm,
+  },
 })
 export default class AddProductView extends Vue {}
 </script>
