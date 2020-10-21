@@ -6,7 +6,7 @@
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item-content>
       </template>
-      <categories-list-item :items="item.subcategories" v-if="item.subcategories"/>
+      <categories-list-item :items="item.subcategories" v-if="item.subcategories" />
     </v-list-group>
   </div>
 </template>

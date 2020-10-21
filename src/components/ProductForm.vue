@@ -92,15 +92,19 @@ export default class ProductForm extends Vue {
 
   public handleSubmit(): void {
     if ((this.$refs.observer as Vue & { validate: () => boolean }).validate()) {
-      this.saveProduct();
-      this.snackBarText = `Your product ${name} was saved`;
-      this.showSnackBar = true;
-      this.clearForm();
-      this.closeForm();
+      if (this.saveProduct()) {
+        this.snackBarText = `Your product ${name} was saved`;
+        this.showSnackBar = true;
+        this.clearForm();
+
+        if (this.productEdit) {
+          this.closeForm();
+        }
+      }
     }
   }
 
-  private saveProduct(): void {
+  private saveProduct(): boolean {
     const items = JSON.parse(localStorage.getItem('user-products') || '[]');
     const { name, description, price, categoryId } = this;
     const category = this.categories.find(cat => cat.id == categoryId);
@@ -117,10 +121,13 @@ export default class ProductForm extends Vue {
         category: { id: categoryId, title: categoryTitle }
       };
       localStorage.setItem('user-products', JSON.stringify(items));
-      return;
+      const updated = JSON.parse(localStorage.getItem('user-products') || '[]');
+      return updated === JSON.stringify(items);
     }
     items.push({ id, name, description, price, category: { id: categoryId, title: categoryTitle } });
     localStorage.setItem('user-products', JSON.stringify(items));
+    const updated = localStorage.getItem('user-products');
+    return updated === JSON.stringify(items);
   }
 
   private clearForm(): void {
