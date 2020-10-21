@@ -15,14 +15,11 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import ProductAddForm from '@/components/ProductForm.vue';
-import ProductForm from '@/components/ProductForm.vue';
 import productItem from '@/types/productItem';
 
 @Component({
   components: {
-    ProductForm,
-    ProductAddForm,
+    'product-form': () => import(/* webpackChunkName: "ProductForm" */ '@/components/ProductForm.vue'),
   },
 })
 export default class ProductList extends Vue {

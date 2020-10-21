@@ -5,30 +5,30 @@
     </v-toolbar>
     <validation-observer ref="observer" v-slot="{ invalid }">
       <v-form class="mt-6">
-        <VTextFieldWIthValidation v-model="name" label="Name" rules="required"></VTextFieldWIthValidation>
-        <VTextAreaFieldWithValidation
+        <v-text-field-with-validation v-model="name" label="Name" rules="required"></v-text-field-with-validation>
+        <v-text-area-field-with-validation
           v-model="description"
           label="Description"
           rules="required"
-        ></VTextAreaFieldWithValidation>
+        ></v-text-area-field-with-validation>
         <v-row>
           <v-col>
-            <VMoneyFieldWithValidation
+            <v-money-with-validation
               v-model="price"
               label="Price"
               rules="required"
               :options="{ suffix: 'zł', length: 6, precision: 2, masked: true }"
-            ></VMoneyFieldWithValidation>
+            ></v-money-with-validation>
           </v-col>
           <v-col>
-            <VSelectWithValidation
+            <v-select-with-validation
               v-model="categoryId"
               :items="categories"
               item-text="title"
               item-value="id"
               label="Category"
               rules="required"
-            ></VSelectWithValidation>
+            ></v-select-with-validation>
           </v-col>
         </v-row>
       </v-form>
@@ -45,18 +45,15 @@
 import { Component, Prop, Emit, Vue } from 'vue-property-decorator';
 import { ValidationObserver } from 'vee-validate';
 import categoriesJson from '@/categories.json';
-import VTextFieldWIthValidation from '@/components/inputs/VTextFieldWIthValidation.vue';
-import VTextAreaFieldWithValidation from '@/components/inputs/VTextAreaFieldWithValidation.vue';
-import VMoneyFieldWithValidation from '@/components/inputs/VMoneyFieldWithValidation.vue';
-import VSelectWithValidation from '@/components/inputs/VSelectWithValidation.vue'; // @ is an alias to /src
 import productItem from '@/types/productItem';
 
 @Component({
   components: {
-    VSelectWithValidation,
-    VMoneyFieldWithValidation,
-    VTextAreaFieldWithValidation,
-    VTextFieldWIthValidation,
+    'v-select-with-validation': () =>
+      import(/* webpackChunkName: "VSelectWithValidation" */ '@/components/inputs/VSelectWithValidation.vue'),
+    'v-money-with-validation': () => import('@/components/inputs/VMoneyFieldWithValidation.vue'),
+    'v-text-area-field-with-validation': () => import('@/components/inputs/VTextAreaFieldWithValidation.vue'),
+    'v-text-field-with-validation': () => import('@/components/inputs/VTextFieldWIthValidation.vue'),
     ValidationObserver,
   },
 })
